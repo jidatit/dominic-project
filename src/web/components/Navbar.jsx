@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import logo from "../../assets/logo.png";
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
+import joinusicon from "../../assets/joinus.png"
+import loginicon from "../../assets/login.png"
 
 const LoaderButton = () => {
     return (
@@ -56,9 +58,9 @@ const Navbar = () => {
                         </svg>
                     </button>
                     <div ref={menuRef} className={`w-full transition-all ease-in-out delay-200 md:flex md:w-auto ${isMenuOpen ? "" : "hidden"}`} id="navbar-default">
-                        <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-white md:flex-row lg:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
+                        <ul className="font-medium flex items-center flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-white md:flex-row lg:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
                             <li>
-                                <Link to="/"> <p className="block py-2 px-2 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 text-black">Home</p></Link>
+                                <Link to="/"><p className="block py-2 px-2 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 text-black">Home</p></Link>
                             </li>
                             {loaderB ? (
                                 <LoaderButton />
@@ -86,13 +88,19 @@ const Navbar = () => {
                                     ) : (
                                         <>
                                             <li>
-                                                <Link to="/auth">
-                                                    <button className='block py-2 px-6 md:mt-0 mt-1 rounded-[20px] bg-[#2ca960] md:border-0 text-white'>Login</button>
+                                                <Link to="/auth/signup">
+                                                    <div className='py-2 flex flex-col justify-center items-center px-6 md:mt-0 mt-1 rounded-[20px] bg-transparent md:border-0 text-black'>
+                                                        <img src={joinusicon} alt="" />
+                                                        <p>Join Us</p>
+                                                    </div>
                                                 </Link>
                                             </li>
                                             <li>
-                                                <Link to="/auth/signup">
-                                                    <button className='block py-2 px-6 md:mt-0 mt-1 rounded-[20px] bg-[#2ca960] md:border-0 text-white'>Signup</button>
+                                                <Link to="/auth">
+                                                    <div className='py-2 flex flex-col justify-center items-center px-6 md:mt-0 mt-1 rounded-[20px] bg-transparent md:border-0 text-black'>
+                                                        <img src={loginicon} alt="" />
+                                                        <p>Log In</p>
+                                                    </div>
                                                 </Link>
                                             </li>
                                         </>
