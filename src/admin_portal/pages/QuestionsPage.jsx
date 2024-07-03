@@ -10,11 +10,11 @@ const QuestionsPage = () => {
 
                 <div className='w-full flex mb-[20px] gap-2 flex-col lg:flex-row justify-start items-center'>
 
-                    <div onClick={() => setSelectedSection("HF")} className={`lg:w-[33%] w-full lg:px-2 px-1 py-2 lg:py-4 flex flex-col justify-center transition-all delay-150 cursor-pointer items-center rounded-[33px] ${SelectedSection === "HF" ? "bg-[#6D00F8] text-white" : "bg-transparent border-[#6D00F8] text-[#6D00F8] border-[3px]"} lg:text-[24px] font-semibold lg:font-bold`}>
+                    <div onClick={() => setSelectedSection("HF")} className={`lg:w-[25%] w-full lg:px-2 px-1 py-2 lg:py-3 flex flex-col justify-center items-center transition-all delay-150 cursor-pointer rounded-[33px] ${SelectedSection === "HF" ? "bg-[#6D00F8] text-white" : "bg-transparent border-[#6D00F8] text-[#6D00F8] border-[3px]"} lg:text-[18px] font-semibold lg:font-bold`}>
                         <p className='text-center'>Health & Fitness</p>
                     </div>
 
-                    <div onClick={() => setSelectedSection("CE")} className={`lg:w-[33%] cursor-pointer w-full lg:px-1 px-1 py-2 lg:py-4 flex transition-all delay-150 flex-col justify-center items-center rounded-[33px] ${SelectedSection === "CE" ? "bg-[#6D00F8] border-[3px] border-[#6D00F8] text-white" : "bg-transparent border-[#6D00F8] text-[#6D00F8] border-[3px]"} lg:text-[24px] font-semibold lg:font-bold`}>
+                    <div onClick={() => setSelectedSection("CE")} className={`lg:w-[28%] w-full lg:px-3 px-1 py-2 lg:py-3 flex flex-col justify-center items-center transition-all delay-150  cursor-pointer rounded-[33px] ${SelectedSection === "CE" ? "bg-[#6D00F8] border-[3px] border-[#6D00F8] text-white" : "bg-transparent border-[#6D00F8] text-[#6D00F8] border-[3px]"} lg:text-[18px] font-semibold lg:font-bold`}>
                         <p className='text-center'>Culturescape Exploration</p>
                     </div>
 

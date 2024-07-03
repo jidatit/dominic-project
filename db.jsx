@@ -4,7 +4,6 @@ import { getStorage } from "firebase/storage";
 import { getFirestore } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 
-// Your web app's Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyD9EoYEW4q-CuhX3j-kz6pVwTwhJhxfyRk",
   authDomain: "dominic-project-30d16.firebaseapp.com",

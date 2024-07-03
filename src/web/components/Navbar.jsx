@@ -74,13 +74,8 @@ const Navbar = () => {
                                         </li>
                                     ) : currentUser && signupType !== "admin" ? (
                                         <>
-                                            {/* <li>
-                                                <Link to="/user_portal">
-                                                    <button className='block py-2 px-6 md:mt-0 mt-1 rounded-[20px] bg-[#2ca960] md:border-0 text-white'>User Portal</button>
-                                                </Link>
-                                            </li> */}
                                             <li>
-                                                <Link to="/user_portal/logout">
+                                                <Link to="/logout">
                                                     <button className='block py-2 px-6 md:mt-0 mt-1 rounded-[20px] bg-[#D62828] md:border-0 text-white'>Logout</button>
                                                 </Link>
                                             </li>
