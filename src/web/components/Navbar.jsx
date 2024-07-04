@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
 import joinusicon from "../../assets/joinus.png"
 import loginicon from "../../assets/login.png"
+import UserProfilePicture from '../../assets/placeholder.jpg';
 
 const LoaderButton = () => {
     return (
@@ -74,6 +75,13 @@ const Navbar = () => {
                                         </li>
                                     ) : currentUser && signupType !== "admin" ? (
                                         <>
+                                            <li>
+                                                <Link to="/user-profile">
+                                                    <span className="h-10 w-10 mr-2 block border-2 border-gray-300 rounded-full overflow-hidden">
+                                                        <img src={UserProfilePicture} alt="user profile photo" className="h-10 w-10" />
+                                                    </span>
+                                                </Link>
+                                            </li>
                                             <li>
                                                 <Link to="/logout">
                                                     <button className='block py-2 px-6 md:mt-0 mt-1 rounded-[20px] bg-[#D62828] md:border-0 text-white'>Logout</button>

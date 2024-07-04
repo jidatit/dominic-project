@@ -1,15 +1,26 @@
-import React, { useEffect } from "react";
-import { db, auth } from '../../../db';
+import React from "react";
+import { auth } from '../../../db';
+import { useAuth } from '../../AuthContext';
 import { useNavigate } from "react-router-dom";
 import BackgroundImage from '../../assets/background.jpg';
 
 const Homepage = () => {
+
   const navigate = useNavigate();
+  const { signupType } = useAuth()
   const user = auth.currentUser;
 
-  const handleHealthAndFitnessfTest = () => {
+  const handleHealthAndFitnessAssessment = () => {
     if (user) {
-      navigate('/health-&-fitness-assessment');
+      navigate('/health-and-fitness-assessment');
+    } else {
+      navigate('/auth');
+    }
+  }
+
+  const handleCulturescopeExplorationAssessment = () => {
+    if (user) {
+      navigate('/culturescope-exploration-assessment');
     } else {
       navigate('/auth');
     }
@@ -37,14 +48,22 @@ const Homepage = () => {
           Remember, there's no prescribed way to navigate this exploration. The aim is to offer insights and provoke thought, encouraging you to see yourself more clearly and chart a course towards your definition of success and happiness. Let's embark on this enlightening journey together, with openness, curiosity, and a readiness to uncover the richness and potential of your life's many facets.
         </div>
 
-        <div className="w-full flex flex-col lg:flex-row justify-center items-center gap-4 mb-14" >
-          <button onClick={handleHealthAndFitnessfTest} className="lg:w-[40%] w-[90%] py-4 lg:px-10 px-6 bg-[#6D00F8] text-white lg:text-lg text-sm font-bold cursor-pointer rounded-md" >
-            Take Assessment For Health & Fitness
-          </button>
-          <button className="lg:w-[40%] w-[90%] py-4 lg:px-10 px-6 bg-[#2187A2] text-white lg:text-lg text-sm font-bold cursor-pointer rounded-md" >
-            Take Assessment For Culturescape
-          </button>
-        </div>
+        {!signupType || signupType === "User" ? (
+          <>
+            <div className="w-full flex flex-col lg:flex-row justify-center items-center gap-4 mb-14" >
+              <button onClick={handleHealthAndFitnessAssessment} className="lg:w-[40%] w-[90%] py-4 lg:px-10 px-6 bg-[#6D00F8] text-white lg:text-lg text-sm font-bold cursor-pointer rounded-md" >
+                Take Assessment For Health & Fitness
+              </button>
+              <button onClick={handleCulturescopeExplorationAssessment} className="lg:w-[40%] w-[90%] py-4 lg:px-10 px-6 bg-[#2187A2] text-white lg:text-lg text-sm font-bold cursor-pointer rounded-md" >
+                Take Assessment For Culturescape
+              </button>
+            </div>
+          </>
+        )
+          : (
+            <>
+            </>
+          )}
 
       </div>
     </>

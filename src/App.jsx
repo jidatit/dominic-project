@@ -13,7 +13,12 @@ import AdminLogin from './auth/pages/AdminLogin'
 import UsersPage from './admin_portal/pages/UsersPage'
 import UserLayout from "./user_portal/Layout"
 import QuestionsPage from './admin_portal/pages/QuestionsPage'
-import HFHome from './web/components/HF/HFHome'
+
+import HFResponse from './web/components/answers/HFResponse'
+import HFFinalResult from './web/components/answers/HFFinalResult'
+import CEResponse from './web/components/answers/CEResponse'
+import CEFinalResult from './web/components/answers/CEFinalResult'
+import UserProfile from './web/components/userProfle/UserProfile';
 
 function App() {
   return (
@@ -29,7 +34,11 @@ function App() {
 
           <Route path='/' element={<WebLayout />}>
             <Route index element={<Homepage />} />
-            <Route path='health-&-fitness-assessment' element={< HFHome />} />
+            <Route path='health-and-fitness-assessment' element={< HFResponse />} />
+            <Route path='health-and-fitness-assessment-final-result' element={< HFFinalResult />} />
+            <Route path='culturescope-exploration-assessment' element={< CEResponse />} />
+            <Route path='culturescope-exploration-assessment-final-result' element={< CEFinalResult />} />
+            <Route path='user-profile' element={< UserProfile />} />
             <Route path='logout' element={<Logout />} />
           </Route>
 
