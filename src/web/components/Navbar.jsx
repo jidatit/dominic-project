@@ -47,11 +47,10 @@ const Navbar = () => {
         };
     }, [menuRef]);
 
-
     return (
         <>
             <nav className="bg-white border-gray-200">
-                <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+                <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
                     <Link to="/"><img src={logo} className=" max-h-[70px] transform-scale-[1.3]" alt="Flowbite Logo" /></Link>
                     <button onClick={toggleMenu} type="button" className="inline-flex items-center p-2 w-10 h-10 mt-[-20px] justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-200" aria-controls="navbar-default" aria-expanded={isMenuOpen}>
                         <span className="sr-only">Open main menu</span>
@@ -60,9 +59,9 @@ const Navbar = () => {
                         </svg>
                     </button>
                     <div ref={menuRef} className={`w-full transition-all ease-in-out delay-200 md:flex md:w-auto ${isMenuOpen ? "" : "hidden"}`} id="navbar-default">
-                        <ul className="font-medium flex items-center flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-white md:flex-row lg:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
+                        <ul className="font-medium flex items-center gap-4 flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-white md:flex-row lg:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white">
                             <li>
-                                <Link to="/"><p className="block py-2 px-2 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 text-black">Home</p></Link>
+                                <Link to="/"><p className="block py-2 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 text-black">Home</p></Link>
                             </li>
                             {loaderB ? (
                                 <LoaderButton />
@@ -78,9 +77,10 @@ const Navbar = () => {
                                         <>
                                             <li>
                                                 <Link to="/user-profile">
-                                                    <span className="h-10 w-10">
-                                                        <PersonOutlineRoundedIcon sx={{ fontSize: 40 }}  />
-                                                    </span>
+                                                    <div className="flex flex-row justify-start items-center gap-2">
+                                                        <PersonOutlineRoundedIcon sx={{ fontSize: 30 }}  />
+                                                        <h1> {currentUser.data.name} </h1>
+                                                    </div>
                                                 </Link>
                                             </li>
                                             <li>

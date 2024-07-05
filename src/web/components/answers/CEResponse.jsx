@@ -7,6 +7,7 @@ import { doc, collection, getDocs, setDoc } from 'firebase/firestore';
 import { db, auth } from '../../../../db';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Stepper, Step, StepLabel, ThemeProvider, createTheme } from '@mui/material';
 
 const CEResponse = () => {
 
@@ -16,6 +17,7 @@ const CEResponse = () => {
     const [healthAndFitnessQuestions, setHealthAndFitnessQuestions] = useState([]);
     const [questionIndex, setQuestionIndex] = useState(0);
     const [usersAnswers, setUsersAnswers] = useState([]);
+    const [showRatingBox, setShowRatingBox] = useState(true);
 
     const fetchHealthAndFitnessQuestions = async () => {
         try {
@@ -70,8 +72,11 @@ const CEResponse = () => {
     const handleNext = () => {
         const currentAnswer = usersAnswers[questionIndex]?.current;
         const desiredAnswer = usersAnswers[questionIndex]?.desired;
-        if (currentAnswer && desiredAnswer && questionIndex < healthAndFitnessQuestions.length - 1) {
+        if (currentAnswer && desiredAnswer && questionIndex < healthAndFitnessQuestions.length) {
             setQuestionIndex(prevIndex => prevIndex + 1);
+            if (healthAndFitnessQuestions.length === questionIndex + 1) {
+                setShowRatingBox(false);
+            }
         } else {
             toast.error("Please Rate your Current & Ideal Level");
         }
@@ -123,6 +128,14 @@ const CEResponse = () => {
         }
     };
 
+    const theme = createTheme({
+        palette: {
+            primary: {
+                main: '#2187A2',
+            },
+        },
+    });
+
     return (
         <>
             {user ? (
@@ -145,78 +158,93 @@ const CEResponse = () => {
                     ) : (
                         <>
                             <ToastContainer />
+                            <div className='px-36' >
+                                <ThemeProvider theme={theme}>
+                                    <Stepper activeStep={questionIndex} alternativeLabel>
+                                        {healthAndFitnessQuestions.map((question, index) => (
+                                            <Step key={question.id}>
+                                                <StepLabel></StepLabel>
+                                            </Step>
+                                        ))}
+                                    </Stepper>
+                                </ThemeProvider>
+                            </div>
                             <p className="w-full text-lg text-center lg:px-44 px-8">
                                 {healthAndFitnessQuestions.length > 0 ? healthAndFitnessQuestions[questionIndex]?.question : '-'}
                             </p>
-                            <div className="w-full h-auto flex flex-col justify-center items-center gap-4 lg:px-44 px-8">
-                                <div className="flex flex-row justify-center items-center gap-3">
-                                    <StarIcon sx={{ color: '#2187A2' }} />
-                                    <p className="text-gray-900">
-                                        On a scale of 1 to 10, rate where your current level is in this area of life?
-                                    </p>
-                                </div>
-                                <div className="flex flex-row justify-center items-center gap-0 cursor-pointer">
-                                    {[...Array(10)].map((_, i) => (
-                                        <div
-                                            key={i + 1}
-                                            onClick={() => handleCurrentValueChange(i + 1)}
-                                            className={`${classForCurrentState(i + 1)} ${i === 0 ? 'border-2 border-customBlue rounded-tl-lg rounded-bl-lg' : i === 9 ? 'border-t-2 border-b-2 border-r-2 border-customBlue rounded-tr-lg rounded-br-lg' : 'border-t-2 border-b-2 border-r-2 border-customBlue'}`}>
-                                            {i + 1}
+                            {showRatingBox === true ? (
+                                <>
+                                    <div className="w-full h-auto flex flex-col justify-center items-center gap-4 lg:px-44 px-8">
+                                        <div className="flex flex-row justify-center items-center gap-3">
+                                            <StarIcon sx={{ color: '#2187A2' }} />
+                                            <p className="text-gray-900">
+                                                On a scale of 1 to 10, rate where your current level is in this area of life?
+                                            </p>
                                         </div>
-                                    ))}
-                                </div>
-                            </div>
-
-                            <div className="w-full h-auto flex flex-col justify-center items-center gap-4 lg:px-44 px-8">
-                                <div className="flex flex-row justify-center items-center gap-3">
-                                    <StarIcon sx={{ color: '#2187A2' }} />
-                                    <p className="text-gray-900">
-                                        On a scale of 1 to 10, rate where would you ideally want to be in this area of life?
-                                    </p>
-                                </div>
-                                <div className="flex flex-row justify-center items-center gap-0 cursor-pointer">
-                                    {[...Array(10)].map((_, i) => (
-                                        <div
-                                            key={i + 1}
-                                            onClick={() => handleDesiredValueChange(i + 1)}
-                                            className={`${classForDesiredState(i + 1)} ${i === 0 ? 'border-2 border-customBlue rounded-tl-lg rounded-bl-lg' : i === 9 ? 'border-t-2 border-b-2 border-r-2 border-customBlue rounded-tr-lg rounded-br-lg' : 'border-t-2 border-b-2 border-r-2 border-customBlue'}`}>
-                                            {i + 1}
+                                        <div className="flex flex-row justify-center items-center gap-0 cursor-pointer">
+                                            {[...Array(10)].map((_, i) => (
+                                                <div
+                                                    key={i + 1}
+                                                    onClick={() => handleCurrentValueChange(i + 1)}
+                                                    className={`${classForCurrentState(i + 1)} ${i === 0 ? 'border-2 border-customBlue rounded-tl-lg rounded-bl-lg' : i === 9 ? 'border-t-2 border-b-2 border-r-2 border-customBlue rounded-tr-lg rounded-br-lg' : 'border-t-2 border-b-2 border-r-2 border-customBlue'}`}>
+                                                    {i + 1}
+                                                </div>
+                                            ))}
                                         </div>
-                                    ))}
-                                </div>
-                            </div>
+                                    </div>
+                                    <div className="w-full h-auto flex flex-col justify-center items-center gap-4 lg:px-44 px-8">
+                                        <div className="flex flex-row justify-center items-center gap-3">
+                                            <StarIcon sx={{ color: '#2187A2' }} />
+                                            <p className="text-gray-900">
+                                                On a scale of 1 to 10, rate where would you ideally want to be in this area of life?
+                                            </p>
+                                        </div>
+                                        <div className="flex flex-row justify-center items-center gap-0 cursor-pointer">
+                                            {[...Array(10)].map((_, i) => (
+                                                <div
+                                                    key={i + 1}
+                                                    onClick={() => handleDesiredValueChange(i + 1)}
+                                                    className={`${classForDesiredState(i + 1)} ${i === 0 ? 'border-2 border-customBlue rounded-tl-lg rounded-bl-lg' : i === 9 ? 'border-t-2 border-b-2 border-r-2 border-customBlue rounded-tr-lg rounded-br-lg' : 'border-t-2 border-b-2 border-r-2 border-customBlue'}`}>
+                                                    {i + 1}
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+                                </>
+                            ) : (
+                                <>
+                                </>
+                            )}
 
                             <div className="w-full flex justify-between items-center lg:px-44 px-8">
-
-
                                 {questionIndex === 0 ? (
                                     <>
-                                        <button onClick={handleBackToStart} className="w-52 flex flex-row justify-center items-center gap-2 py-3 px-6 bg-[#2187A2] text-white cursor-pointer rounded-md">
+                                        <button onClick={handleBackToStart} className="w-40 flex flex-row justify-center items-center gap-2 py-3 px-6 bg-[#2187A2] text-white cursor-pointer rounded-md">
+                                            <p className="text-sm lg:text-lg font-bold"> Start </p>
                                             <WestIcon />
-                                            <p className="text-sm lg:text-lg font-bold"> Back to Start </p>
+                                        </button>
+                                        <button onClick={handleNext} className="w-40 flex flex-row justify-center items-center gap-2 py-3 px-6 bg-[#2187A2] text-white cursor-pointer rounded-md">
+                                            <p className="text-sm lg:text-lg font-bold"> Next </p>
+                                            <EastIcon />
                                         </button>
                                     </>
                                 ) : (
                                     <>
                                         <button onClick={handlePrevious} className="w-40 flex flex-row justify-center items-center gap-2 py-3 px-6 bg-[#2187A2] text-white cursor-pointer rounded-md">
-                                            <WestIcon />
                                             <p className="text-sm lg:text-lg font-bold"> Previous </p>
+                                            <WestIcon />
                                         </button>
-                                    </>
-                                )}
-                                {questionIndex === 9 ? (
-                                    <>
-                                        <button onClick={handleSubmit} className="w-40 flex flex-row justify-center items-center gap-2 py-3 px-6 bg-[#2187A2] text-white cursor-pointer rounded-md">
-                                            <p className="text-sm lg:text-lg font-bold"> Submit </p>
-                                            <EastIcon />
-                                        </button>
-                                    </>
-                                ) : (
-                                    <>
-                                        <button onClick={handleNext} className="w-40 flex flex-row justify-center items-center gap-2 py-3 px-6 bg-[#2187A2] text-white cursor-pointer rounded-md">
-                                            <p className="text-sm lg:text-lg font-bold"> Next </p>
-                                            <EastIcon />
-                                        </button>
+                                        {questionIndex === healthAndFitnessQuestions.length ? (
+                                            <button onClick={handleSubmit} className="w-40 flex flex-row justify-center items-center gap-2 py-3 px-6 bg-[#2187A2] text-white cursor-pointer rounded-md">
+                                                <p className="text-sm lg:text-lg font-bold"> Submit </p>
+                                                <EastIcon />
+                                            </button>
+                                        ) : (
+                                            <button onClick={handleNext} className="w-40 flex flex-row justify-center items-center gap-2 py-3 px-6 bg-[#2187A2] text-white cursor-pointer rounded-md">
+                                                <p className="text-sm lg:text-lg font-bold"> Next </p>
+                                                <EastIcon />
+                                            </button>
+                                        )}
                                     </>
                                 )}
                             </div>

@@ -62,7 +62,8 @@ const UserProfile = () => {
                 const userDoc = doc(db, 'users', user.uid);
                 const userSnapshot = await getDoc(userDoc);
                 if (userSnapshot.exists()) {
-                    setUserInfo(userSnapshot.data());
+                    const userCompleteData = userSnapshot.data();
+                    setUserInfo(userCompleteData);
                 } else {
                     console.error('No such user document!');
                 }
@@ -219,7 +220,13 @@ const UserProfile = () => {
                                         variant="contained"
                                         component="label"
                                         startIcon={<CloudUploadIcon />}
-                                        sx={{ mt: 2 }}
+                                        sx={{
+                                            mt: 2,
+                                            backgroundColor: '#6D00F8',
+                                            '&:hover': {
+                                                backgroundColor: '#6D00F8',
+                                            },
+                                        }}
                                         fullWidth
                                     >
                                         Upload Picture
@@ -235,7 +242,13 @@ const UserProfile = () => {
                                         variant="contained"
                                         color="primary"
                                         onClick={handleSave}
-                                        sx={{ mt: 2 }}
+                                        sx={{
+                                            mt: 2,
+                                            backgroundColor: '#6D00F8',
+                                            '&:hover': {
+                                                backgroundColor: '#6D00F8',
+                                            },
+                                        }}
                                         fullWidth
                                     >
                                         Save
@@ -298,7 +311,13 @@ const UserProfile = () => {
                                     variant="contained"
                                     color="primary"
                                     onClick={handlePasswordChange}
-                                    sx={{ mt: 2 }}
+                                    sx={{
+                                        mt: 2,
+                                        backgroundColor: '#6D00F8',
+                                        '&:hover': {
+                                            backgroundColor: '#6D00F8',
+                                        },
+                                    }}
                                     fullWidth
                                 >
                                     Change Password

@@ -85,14 +85,14 @@ const CEFinalResult = () => {
                             <p className="text-sm lg:text-lg font-bold"> Save as PDF </p>
                             <DownloadIcon />
                         </button>
-                        <button onClick={() => navigate('')} className="lg:w-auto w-full flex flex-row justify-center items-center gap-2 py-3 px-6 bg-[#2187A2] text-white cursor-pointer rounded-md">
+                        {/* <button onClick={() => navigate('')} className="lg:w-auto w-full flex flex-row justify-center items-center gap-2 py-3 px-6 bg-[#2187A2] text-white cursor-pointer rounded-md">
                             <p className="text-sm lg:text-lg font-bold"> Share on Facebook </p>
                             <FacebookIcon />
                         </button>
                         <button onClick={() => navigate('')} className="lg:w-auto w-full flex flex-row justify-center items-center gap-2 py-3 px-6 bg-[#2187A2] text-white cursor-pointer rounded-md">
                             <p className="text-sm lg:text-lg font-bold"> Email my Wheel </p>
                             <EmailIcon />
-                        </button>
+                        </button> */}
                     </div>
                     {healthAndFitnessQuestions.map((question, index) => (
                         <div key={index} className="w-full flex flex-col justify-start items-start lg:px-44 px-8">
