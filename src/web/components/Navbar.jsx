@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../AuthContext';
 import joinusicon from "../../assets/joinus.png"
 import loginicon from "../../assets/login.png"
-import UserProfilePicture from '../../assets/placeholder.jpg';
+import PersonOutlineRoundedIcon from '@mui/icons-material/PersonOutlineRounded';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const LoaderButton = () => {
     return (
@@ -77,8 +78,8 @@ const Navbar = () => {
                                         <>
                                             <li>
                                                 <Link to="/user-profile">
-                                                    <span className="h-10 w-10 mr-2 block border-2 border-gray-300 rounded-full overflow-hidden">
-                                                        <img src={UserProfilePicture} alt="user profile photo" className="h-10 w-10" />
+                                                    <span className="h-10 w-10">
+                                                        <PersonOutlineRoundedIcon sx={{ fontSize: 40 }}  />
                                                     </span>
                                                 </Link>
                                             </li>

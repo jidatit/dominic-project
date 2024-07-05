@@ -33,6 +33,7 @@ const HFResponse = () => {
 
     useEffect(() => {
         fetchHealthAndFitnessQuestions();
+        localStorage.removeItem('desiredDestination');
     }, []);
 
     const handleStart = () => {
@@ -52,12 +53,6 @@ const HFResponse = () => {
 
     const handleSubmit = async () => {
         console.log(usersAnswers);
-        if (usersAnswers.length === 10) {
-            toast.success("All Responses Collected");
-        } else {
-            toast.error("Please Rate your Current & Ideal Level");
-            return;
-        }
         try {
             const answersCollectionRef = doc(db, 'HFResponses', user.uid);
             await setDoc(answersCollectionRef, { userid: user.uid, answers: usersAnswers }, { merge: true });
@@ -131,7 +126,7 @@ const HFResponse = () => {
     return (
         <>
             {user ? (
-                <div className="w-full h-auto min-h-[520px] flex flex-col gap-8 border-t-2 border-gray-300 py-8">
+                <div className="w-full h-auto flex flex-col gap-8 border-t-2 border-gray-300 py-8">
                     {introductionState === true ? (
                         <>
                             <h1 className="w-full font-bold text-2xl text-center">

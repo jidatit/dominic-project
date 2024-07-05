@@ -7,7 +7,8 @@ import EmailIcon from '@mui/icons-material/Email';
 import { collection, doc, getDocs, getDoc } from 'firebase/firestore';
 import { db, auth } from '../../../../db';
 import 'react-toastify/dist/ReactToastify.css';
-import html2pdf from 'html2pdf.js';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 const HFFinalResult = () => {
 
@@ -56,14 +57,23 @@ const HFFinalResult = () => {
     };
 
     const handleSaveAsPDF = () => {
-        const element = document.getElementById('result-content');
-        html2pdf().from(element).save('FinalResult.pdf');
+        const input = document.getElementById('result-content');
+
+        html2canvas(input)
+            .then((canvas) => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jsPDF('p', 'in', 'letter'); 
+                const imgWidth = 8.5; 
+                const imgHeight = canvas.height * imgWidth / canvas.width;
+                pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+                pdf.save('FinalResult.pdf');
+            });
     };
 
     return (
         <>
             {user ? (
-                <div id="result-content" className="w-full h-auto min-h-[520px] flex flex-col gap-8 border-t-2 border-gray-300 py-8">
+                <div id="result-content" className="w-full h-auto flex flex-col gap-8 border-t-2 border-gray-300 py-8">
                     <h1 className="w-full font-bold text-2xl text-center">
                         Final Result
                     </h1>

@@ -14,14 +14,16 @@ const Homepage = () => {
     if (user) {
       navigate('/health-and-fitness-assessment');
     } else {
+      localStorage.setItem('desiredDestination', '/health-and-fitness-assessment');
       navigate('/auth');
     }
   }
 
-  const handleCulturescopeExplorationAssessment = () => {
+  const handleCulturescopeExplorationAssessment = async () => {
     if (user) {
       navigate('/culturescope-exploration-assessment');
     } else {
+      localStorage.setItem('desiredDestination', '/culturescope-exploration-assessment');
       navigate('/auth');
     }
   }
