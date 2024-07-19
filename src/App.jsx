@@ -1,13 +1,14 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useNavigate } from "react-router-dom"
+import { useAuth } from './AuthContext'
+
 import Layout from './auth/Layout'
 import Login from './auth/pages/Login'
 import Signup from './auth/pages/Signup'
 import Homepage from './web/pages/Homepage'
 import WebLayout from "./web/Layout"
 import AdminLayout from "./admin_portal/Layout"
-import { useAuth } from './AuthContext'
 import NotFound from './web/pages/NotFound'
 import AdminLogin from './auth/pages/AdminLogin'
 import UsersPage from './admin_portal/pages/UsersPage'
@@ -19,6 +20,9 @@ import HFFinalResult from './web/components/answers/HFFinalResult'
 import CEResponse from './web/components/answers/CEResponse'
 import CEFinalResult from './web/components/answers/CEFinalResult'
 import UserProfile from './web/components/userProfle/UserProfile';
+
+import RadarChart from './test/RadarChart';
+import CombinedChart from './test/RadarChart'
 
 function App() {
   return (
@@ -51,6 +55,8 @@ function App() {
           <Route path='/user_portal' element={<UserLayout />}>
             <Route path='logout' element={<Logout />} />
           </Route>
+
+          <Route path='charts' element={<CombinedChart />} />
 
           <Route path='*' element={<NotFound />} />
 
