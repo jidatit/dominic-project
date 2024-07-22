@@ -79,7 +79,7 @@ const Navbar = () => {
                                                 <Link to="/user-profile">
                                                     <div className="flex flex-row justify-start items-center gap-2">
                                                         <PersonOutlineRoundedIcon sx={{ fontSize: 30 }}  />
-                                                        <h1> {currentUser.data.name} </h1>
+                                                        <h1> {currentUser?.data.name} </h1>
                                                     </div>
                                                 </Link>
                                             </li>
