@@ -117,7 +117,7 @@ const HFResponse = () => {
 	};
 
 	const classForCurrentState = (rating) => {
-		const baseClasses = "px-5 py-2 font-semibold text-lg cursor-pointer";
+		const baseClasses = "md:px-5 px-3 py-2 font-semibold md:text-lg text-base cursor-pointer";
 		const defaultTextColor = "text-[#6D00F8]";
 		const selectedTextColor = "text-white";
 		const selectedBgColor = "bg-[#6D00F8]";
@@ -131,7 +131,7 @@ const HFResponse = () => {
 	};
 
 	const classForDesiredState = (rating) => {
-		const baseClasses = "px-5 py-2 font-semibold text-lg cursor-pointer";
+		const baseClasses = "md:px-5 px-3 py-2 font-semibold md:text-lg text-base cursor-pointer";
 		const defaultTextColor = "text-[#6D00F8]";
 		const selectedTextColor = "text-white";
 		const selectedBgColor = "bg-[#6D00F8]";
@@ -194,7 +194,7 @@ const HFResponse = () => {
 									</Stepper>
 								</ThemeProvider>
 							</div>
-							<p className="w-full text-lg text-center lg:px-44 px-8">
+							<p className="w-full text-base md:text-lg text-center lg:px-44 px-8">
 								{healthAndFitnessQuestions.length > 0
 									? healthAndFitnessQuestions[questionIndex]?.question
 									: "-"}
@@ -209,7 +209,7 @@ const HFResponse = () => {
 												in this area of life?
 											</p>
 										</div>
-										<div className="flex lg:flex-row md:flex-row flex-col justify-center items-center gap-0 cursor-pointer">
+										<div className="flex flex-row justify-center items-center gap-0 cursor-pointer">
 											{[...Array(10)].map((_, i) => (
 												<div
 													key={i + 1}
@@ -235,7 +235,7 @@ const HFResponse = () => {
 												to be in this area of life?
 											</p>
 										</div>
-										<div className="flex lg:flex-row md:flex-row flex-col justify-center items-center gap-0 cursor-pointer">
+										<div className="flex flex-rowjustify-center items-center gap-0 cursor-pointer">
 											{[...Array(10)].map((_, i) => (
 												<div
 													key={i + 1}

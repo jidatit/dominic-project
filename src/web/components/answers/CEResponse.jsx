@@ -117,7 +117,7 @@ const CEResponse = () => {
 	};
 
 	const classForCurrentState = (rating) => {
-		const baseClasses = "px-5 py-2 font-semibold text-lg cursor-pointer";
+		const baseClasses = "md:px-5 px-3 py-2 font-semibold md:text-lg text-base cursor-pointer";
 		const defaultTextColor = "text-[#2187A2]";
 		const selectedTextColor = "text-white";
 		const selectedBgColor = "bg-[#2187A2]";
@@ -131,7 +131,7 @@ const CEResponse = () => {
 	};
 
 	const classForDesiredState = (rating) => {
-		const baseClasses = "px-5 py-2 font-semibold text-lg cursor-pointer";
+		const baseClasses = "md:px-5 px-3 py-2 font-semibold md:text-lg text-base cursor-pointer";
 		const defaultTextColor = "text-[#2187A2]";
 		const selectedTextColor = "text-white";
 		const selectedBgColor = "bg-[#2187A2]";
@@ -192,7 +192,7 @@ const CEResponse = () => {
 									</Stepper>
 								</ThemeProvider>
 							</div>
-							<p className="w-full text-lg text-center lg:px-44 px-8">
+							<p className="w-full text-base md:text-lg text-center lg:px-44 px-8">
 								{healthAndFitnessQuestions.length > 0
 									? healthAndFitnessQuestions[questionIndex]?.question
 									: "-"}
