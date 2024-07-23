@@ -12,6 +12,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Alert from "@mui/material/Alert";
 import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from "../../../db";
+import ApexChart from "../../test/RadarChart";
 
 const Loader = () => (
 	<div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-200 opacity-75 z-50">
@@ -27,6 +28,10 @@ const MaxWidthDialog = ({ open, onClose, user }) => {
 	const [cultureQuestions, setCultureQuestions] = React.useState([]);
 	const [healthResponses, setHealthResponses] = React.useState([]);
 	const [cultureResponses, setCultureResponses] = React.useState([]);
+	const [healthCurrentValues, setHealthCurrentValues] = React.useState([]);
+	const [healthDesiredValues, setHealthDesiredValues] = React.useState([]);
+	const [cultureCurrentValues, setCultureCurrentValues] = React.useState([]);
+	const [cultureDesiredValues, setCultureDesiredValues] = React.useState([]);
 	const [loading, setLoading] = React.useState(true);
 	const [error, setError] = React.useState(null);
 
@@ -53,14 +58,38 @@ const MaxWidthDialog = ({ open, onClose, user }) => {
 					where("userid", "==", user.id),
 				);
 				const healthRSnapshot = await getDocs(healthRCollection);
-				setHealthResponses(healthRSnapshot.docs.map((doc) => doc.data()));
+				const healthResponsesData = healthRSnapshot.docs.map((doc) =>
+					doc.data(),
+				);
+				setHealthResponses(healthResponsesData);
 
 				const cultureRCollection = query(
 					collection(db, "CEResponses"),
 					where("userid", "==", user.id),
 				);
 				const cultureRSnapshot = await getDocs(cultureRCollection);
-				setCultureResponses(cultureRSnapshot.docs.map((doc) => doc.data()));
+				const cultureResponsesData = cultureRSnapshot.docs.map((doc) =>
+					doc.data(),
+				);
+				setCultureResponses(cultureResponsesData);
+
+				const healthCurrent = healthResponsesData[0]?.answers.map(
+					(answer) => answer.current || 0,
+				);
+				const healthDesired = healthResponsesData[0]?.answers.map(
+					(answer) => answer.desired || 0,
+				);
+				const cultureCurrent = cultureResponsesData[0]?.answers.map(
+					(answer) => answer.current || 0,
+				);
+				const cultureDesired = cultureResponsesData[0]?.answers.map(
+					(answer) => answer.desired || 0,
+				);
+
+				setHealthCurrentValues(healthCurrent);
+				setHealthDesiredValues(healthDesired);
+				setCultureCurrentValues(cultureCurrent);
+				setCultureDesiredValues(cultureDesired);
 			} catch (error) {
 				setError("Error fetching questions and responses. Please try again.");
 			} finally {
@@ -193,6 +222,12 @@ const MaxWidthDialog = ({ open, onClose, user }) => {
 								{tabIndex === 0 && (
 									<Box>
 										<h2>Health and Fitness Questions and Responses:</h2>
+										<div>
+											<ApexChart
+												currentValues={healthCurrentValues}
+												desiredValues={healthDesiredValues}
+											/>
+										</div>
 										{healthQuestions.length === 0 ? (
 											<Alert severity="info">
 												No health and fitness questions available.
@@ -205,6 +240,10 @@ const MaxWidthDialog = ({ open, onClose, user }) => {
 								{tabIndex === 1 && (
 									<Box>
 										<h2>Culterscape Questions and Responses:</h2>
+										<ApexChart
+											currentValues={cultureCurrentValues}
+											desiredValues={cultureDesiredValues}
+										/>
 										{cultureQuestions.length === 0 ? (
 											<Alert severity="info">
 												No Culterscape questions available.
